@@ -3,6 +3,7 @@ import { ADD_CATEGORYNAME } from "./type";
 const defaultState = {
 	category: [],
 };
+
 // const categoryReducer = (state = defaultState, action) => {
 // 	console.log("payload   ", action.payload);
 // 	switch (action.type) {
@@ -24,16 +25,16 @@ const defaultState = {
 // 	}
 // };
 
-const categoryReducer = (state = defaultState, action) => {
-	switch (action.type) {
-		case ADD_CATEGORYNAME:
-			console.log("add category", action.category);
-			return state;
-		case "ADD_CATEGORYNAME_ERR":
-			console.log("error category ", action.err);
-			return state;
-		default:
-			return state;
-	}
-};
+// const categoryReducer = (state = defaultState, action) => {
+// 	switch (action.type) {
+// 		case ADD_CATEGORYNAME:
+// 			console.log("add category", action.category);
+// 			return state;
+// 		case "ADD_CATEGORYNAME_ERR":
+// 			console.log("error category ", action.err);
+// 			return state;
+// 		default:
+// 			return state;
+// 	}
+// };
 export default categoryReducer;
