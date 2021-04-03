@@ -1,18 +1,14 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { Redirect, Route, Switch } from "react-router-dom";
-import login from "./Pages/login";
-import Dashboard from "./Pages/Dashboard";
+import AppRouter from "./AppRouter";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store } from "./redux/store";
 
 function App() {
 	return (
-		<Switch>
-			<Route exact path='/'>
-				<Dashboard />
-			</Route>
-			<Route exact path='/login' component={login} />
-			<Route path='' render={() => "404 not found!!!"} />
-		</Switch>
+		<Provider store={store}>
+			<AppRouter />
+		</Provider>
 	);
 }
 
