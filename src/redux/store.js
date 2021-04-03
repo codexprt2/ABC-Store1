@@ -1,17 +1,17 @@
-import { createStore, combineReducers } from "redux";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import categoryReducer from "./index";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+import { firestoreReducer } from "redux-firestore";
+import { firebaseReducer, getFirebase } from "react-redux-firebase";
+
 //Creating Store
 // const reducer = combineReducers({});
 
 const reducer = combineReducers({
-	categories: categoryReducer,
+	firebase: firebaseReducer,
+	firestore: firestoreReducer,
 });
 
 export const store = createStore(
 	reducer,
-
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	applyMiddleware(thunk.withExtraArgument(getFirebase))
 );
