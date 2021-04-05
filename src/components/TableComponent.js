@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 	},
 });
 
-const TableComponent = ({ categories }) => {
+const TableComponent = ({ category }) => {
 	const classes = useStyles();
 
 	return (
@@ -31,7 +31,7 @@ const TableComponent = ({ categories }) => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{categories.category.map((item) => (
+					{category.map((item) => (
 						<TableRow key={item.id}>
 							<TableCell component='th' scope='row'>
 								{item.name}
@@ -53,11 +53,11 @@ const TableComponent = ({ categories }) => {
 	);
 };
 
-const mapStateToProps = (store, props) => {
-	const { categories } = store;
-	console.log("store is here", categories);
+const mapStateToProps = (store) => {
+	const { categoryReducer } = store;
+	console.log("store!!!", store);
 	return {
-		categories: categories,
+		category: categoryReducer.category.categories,
 	};
 };
 

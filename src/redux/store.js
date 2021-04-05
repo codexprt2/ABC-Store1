@@ -1,17 +1,16 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import { firestoreReducer } from "redux-firestore";
-import { firebaseReducer, getFirebase } from "react-redux-firebase";
-
-//Creating Store
-// const reducer = combineReducers({});
+import categoryReducer from "../redux/reducer";
 
 const reducer = combineReducers({
-	firebase: firebaseReducer,
-	firestore: firestoreReducer,
+	categoryReducer,
 });
 
 export const store = createStore(
 	reducer,
-	applyMiddleware(thunk.withExtraArgument(getFirebase))
+	compose(
+		applyMiddleware(thunk),
+		window.devToolsExtension ? window.devToolsExtension() : (f) => f
+	)
+	// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

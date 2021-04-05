@@ -1,15 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import { connect } from "react-redux";
-import { addCategory } from "../redux/action";
+import { addCategoryValue } from "../redux/action";
 
-const Form = ({ addCategory1, added }) => {
+const Form = ({ addCategory, added }) => {
 	const [catName, setCatName] = useState();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		addCategory1(catName);
+		addCategory(catName);
 		added(false);
 	};
 
@@ -32,10 +32,8 @@ const Form = ({ addCategory1, added }) => {
 		</form>
 	);
 };
-const mapDispatchToProps = (dispatch) => {
-	return {
-		addCategory1: (data) => dispatch(addCategory(data)),
-	};
-};
+const mapDispatchToProps = (dispatch) => ({
+	addCategory: (val) => dispatch(addCategoryValue(val)),
+});
 
 export default connect(null, mapDispatchToProps)(Form);

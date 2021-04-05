@@ -1,29 +1,24 @@
-import { Category } from "@material-ui/icons";
-import { ADD_CATEGORYNAME } from "./type";
+import * as categoryFirestore from "../helper/firestoreFunctions/category";
+import * as types from "./types";
 
-// export const addCategory = (name) => ({
-// 	type: ADD_CATEGORYNAME,
-// 	payload: {
-// 		name,
-// 	},
-// });
-
-export const addCategory = (category) => {
-	return (dispatch, getState, { getFirebase, getFirestore }) => {
-		const firestore = getFirestore();
-		firestore
-			.collection("category")
-			.add({
-				...Category,
-				categoryName: "sports",
-				CategoryId: 123,
-				createdAt: new Date(),
-			})
-			.then(() => {
-				dispatch({ type: ADD_CATEGORYNAME, category });
-			})
-			.catch((err) => {
-				dispatch({ type: "ADD_CATEGORYNAME_ERR", err });
-			});
+const setCategoryLoader = (val) => {
+	return {
+		type: types.SET_CATEGORY_LOADER,
+		payload: val,
 	};
+};
+
+const setCategoryData = (val) => {
+	return {
+		type: types.SET_CATEGORY,
+		payload: val,
+	};
+};
+
+export const addCategoryValue = (category) => (dispatch) => {
+	dispatch(setCategoryLoader(true));
+	categoryFirestore.addCategory(category).then((categoryVal) => {
+		dispatch(setCategoryData(categoryVal));
+		dispatch(setCategoryLoader(false));
+	});
 };
