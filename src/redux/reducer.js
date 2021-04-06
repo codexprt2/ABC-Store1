@@ -26,6 +26,14 @@ const categoryReducer = (state = defaultState, action) => {
 				},
 			};
 		}
+		case types.EDIT_CATEGORY: {
+			return {
+				category: {
+					...state.category,
+					activeCategories: action.payload,
+				},
+			};
+		}
 
 		default: {
 			return state;

@@ -4,8 +4,10 @@ import ButtonTab from "../components/ButtonTab";
 import "./style.css";
 import Form from "../components/Form";
 import TableComponent from "../components/TableComponent";
+import { connect } from "react-redux";
+import { editCategoryData } from "../redux/action";
 
-const CategoryPage = () => {
+const CategoryPage = ({ addToActiveCat }) => {
 	const [isFormVisible, setisFormVisible] = useState(false);
 	const [updateData, setUpdateData] = useState(null);
 
@@ -15,6 +17,7 @@ const CategoryPage = () => {
 	const handleEdit = (item) => {
 		setisFormVisible(true);
 		setUpdateData(item);
+		addToActiveCat(item);
 	};
 	return (
 		<React.Fragment>
@@ -38,4 +41,9 @@ const CategoryPage = () => {
 		</React.Fragment>
 	);
 };
-export default CategoryPage;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addToActiveCat: (val) => dispatch(editCategoryData(val)),
+	};
+};
+export default connect(null, mapDispatchToProps)(CategoryPage);
