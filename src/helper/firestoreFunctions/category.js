@@ -36,9 +36,19 @@ export const addCategory = (category) => {
 	});
 };
 
-export const editCategory = () => {
-	return new Promise((resolve, reject) => {
+export const editCategory = (category) => {
+	return new Promise((resolve) => {
 		//  Get edit category in firestore
+
+		db.collection("category")
+			.where("category.id", "==", category.id)
+			.get()
+			.then(function (querySnapshot) {
+				querySnapshot.forEach(function (doc) {
+					console.log(doc.id, " => ", doc.data());
+					resolve(doc.update({ name: category }));
+				});
+			});
 	});
 };
 

@@ -1,17 +1,29 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { addCategoryValue } from "../redux/action";
 
-const Form = ({ addCategory, added }) => {
+const Form = ({ addCategory, added, isEdit, editData, onEditHandle }) => {
 	const [catName, setCatName] = useState();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-
-		addCategory(catName);
-		added(false);
+		if (isEdit) {
+			// updateCategory(editData, catName);
+			onEditHandle();
+			setCatName("");
+			added(false);
+		} else {
+			addCategory(catName);
+			added(false);
+		}
 	};
+
+	useEffect(() => {
+		if (isEdit && editData) {
+			setCatName(editData.name);
+		}
+	}, [editData]);
 
 	return (
 		<form

@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 	},
 });
 
-const TableComponent = ({ category }) => {
+const TableComponent = ({ category, handleEdit }) => {
 	const classes = useStyles();
 
 	return (
@@ -39,7 +39,7 @@ const TableComponent = ({ category }) => {
 							<TableCell align='right'>{item.id}</TableCell>
 							<TableCell align='right'>
 								<button>
-									<AiTwotoneEdit />
+									<AiTwotoneEdit onClick={() => handleEdit(item)} />
 								</button>
 								<button>
 									<RiDeleteBin5Line />
