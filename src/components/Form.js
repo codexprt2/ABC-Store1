@@ -1,27 +1,28 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { addCategoryValue, updateCategoryValue } from "../redux/action";
+import { addCategory, editCategory } from "../onlyredux/category/action";
 
 const Form = ({
-	addCategory,
 	added,
 	isEdit,
 	editData,
 	onEditHandle,
+	addCategoryData,
 	updateCategory,
 }) => {
 	const [catName, setCatName] = useState();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
 		if (isEdit) {
-			updateCategory(editData, catName);
+			updateCategory(editData.index, catName);
 			onEditHandle();
 			setCatName("");
 			added(false);
 		} else {
-			addCategory(catName);
+			addCategoryData(catName);
 			added(false);
 		}
 	};
@@ -45,15 +46,17 @@ const Form = ({
 				value={catName}
 				onChange={(e) => setCatName(e.target.value)}
 			/>
-			<br />
 
+			<br />
 			<input type='submit' value='Add Me' />
 		</form>
 	);
 };
-const mapDispatchToProps = (dispatch) => ({
-	addCategory: (val) => dispatch(addCategoryValue(val)),
-	updateCategory: (val) => dispatch(updateCategoryValue(val)),
-});
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addCategoryData: (val) => dispatch(addCategory(val)),
+		updateCategory: (index, val) => dispatch(editCategory(index, val)),
+	};
+};
 
 export default connect(null, mapDispatchToProps)(Form);

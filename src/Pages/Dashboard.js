@@ -6,8 +6,14 @@ import "./style.css";
 
 const Dashboard = () => {
 	let history = useHistory();
-	const redirect = () => {
+	const handleCategory = () => {
 		history.push("/category");
+	};
+	const handleProducts = () => {
+		history.push("/products");
+	};
+	const handleSubCategory = () => {
+		history.push("/subcategory");
 	};
 	return (
 		<div>
@@ -16,13 +22,13 @@ const Dashboard = () => {
 			</div>
 			<div className='container'>
 				<div className='btnContainer'>
-					<ButtonTab name='Category' onClick={redirect} />
+					<ButtonTab name='Category' onClick={handleCategory} />
 				</div>
 				<div className='btnContainer'>
-					<ButtonTab name='SubCategory' />
+					<ButtonTab name='SubCategory' onClick={handleSubCategory} />
 				</div>
 				<div className='btnContainer'>
-					<ButtonTab name='Products' />
+					<ButtonTab name='Products' onClick={handleProducts} />
 				</div>
 				<div className='btnContainer'>
 					<ButtonTab name='User' />

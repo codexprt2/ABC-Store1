@@ -36,6 +36,7 @@ export const updateCategoryValue = (category) => (dispatch) => {
 		dispatch(setCategoryLoader(false));
 	});
 };
+
 export const editCategoryData = (val) => {
 	return {
 		type: types.EDIT_CATEGORY,

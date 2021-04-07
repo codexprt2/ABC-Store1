@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { connect } from "react-redux";
+import { removeCategory } from "../onlyredux/category/action";
 
 const useStyles = makeStyles({
 	table: {
@@ -17,8 +18,9 @@ const useStyles = makeStyles({
 	},
 });
 
-const TableComponent = ({ category, handleEdit }) => {
+const TableComponent = ({ handleEdit, category, remove }) => {
 	const classes = useStyles();
+	console.log("category!!!!", category);
 
 	return (
 		<TableContainer component={Paper}>
@@ -31,18 +33,18 @@ const TableComponent = ({ category, handleEdit }) => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{category.map((item) => (
-						<TableRow key={item.id}>
+					{category.map((row, index) => (
+						<TableRow key={`${index}`}>
 							<TableCell component='th' scope='row'>
-								{item.name}
+								{row.name}
 							</TableCell>
-							<TableCell align='right'>{item.id}</TableCell>
+							<TableCell align='right'>{row.id}</TableCell>
 							<TableCell align='right'>
 								<button>
-									<AiTwotoneEdit onClick={() => handleEdit(item)} />
+									<AiTwotoneEdit onClick={() => handleEdit(index, row)} />
 								</button>
 								<button>
-									<RiDeleteBin5Line />
+									<RiDeleteBin5Line onClick={() => remove(row.id)} />
 								</button>
 							</TableCell>
 						</TableRow>
@@ -52,13 +54,16 @@ const TableComponent = ({ category, handleEdit }) => {
 		</TableContainer>
 	);
 };
-
 const mapStateToProps = (store) => {
+	console.log("Store", store);
 	const { categoryReducer } = store;
-	console.log("store!!!", store);
 	return {
 		category: categoryReducer.category.categories,
 	};
 };
-
-export default connect(mapStateToProps, null)(TableComponent);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		remove: (id) => dispatch(removeCategory(id)),
+	};
+};
+export default connect(mapStateToProps, mapDispatchToProps)(TableComponent);

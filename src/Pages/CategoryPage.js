@@ -5,19 +5,18 @@ import "./style.css";
 import Form from "../components/Form";
 import TableComponent from "../components/TableComponent";
 import { connect } from "react-redux";
-import { editCategoryData } from "../redux/action";
 
-const CategoryPage = ({ addToActiveCat }) => {
+const CategoryPage = () => {
 	const [isFormVisible, setisFormVisible] = useState(false);
 	const [updateData, setUpdateData] = useState(null);
 
 	const added = (val) => {
 		setisFormVisible(val);
 	};
-	const handleEdit = (item) => {
+	const handleEdit = (index, editData) => {
+		console.log("item", index, editData);
 		setisFormVisible(true);
-		setUpdateData(item);
-		addToActiveCat(item);
+		setUpdateData({ index, ...editData });
 	};
 	return (
 		<React.Fragment>
@@ -32,7 +31,7 @@ const CategoryPage = ({ addToActiveCat }) => {
 					/>
 				</div>
 			)}
-			<div className='categoryBtn'>
+			<div className='addBtn'>
 				<ButtonTab name='ADD NEW' onClick={() => setisFormVisible(true)} />
 			</div>
 			<div>
@@ -41,9 +40,5 @@ const CategoryPage = ({ addToActiveCat }) => {
 		</React.Fragment>
 	);
 };
-const mapDispatchToProps = (dispatch) => {
-	return {
-		addToActiveCat: (val) => dispatch(editCategoryData(val)),
-	};
-};
-export default connect(null, mapDispatchToProps)(CategoryPage);
+
+export default CategoryPage;
