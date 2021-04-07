@@ -6,10 +6,10 @@ import Form from "../components/Form";
 import TableComponent from "../components/TableComponent";
 import { connect } from "react-redux";
 
-const CategoryPage = () => {
+const CategoryPage = ({ category }) => {
 	const [isFormVisible, setisFormVisible] = useState(false);
 	const [updateData, setUpdateData] = useState(null);
-
+	const tableHeader = ["Category Name"];
 	const added = (val) => {
 		setisFormVisible(val);
 	};
@@ -35,10 +35,20 @@ const CategoryPage = () => {
 				<ButtonTab name='ADD NEW' onClick={() => setisFormVisible(true)} />
 			</div>
 			<div>
-				<TableComponent handleEdit={handleEdit} />
+				<TableComponent
+					headers={tableHeader}
+					handleEdit={handleEdit}
+					data={category}
+				/>
 			</div>
 		</React.Fragment>
 	);
 };
-
-export default CategoryPage;
+const mapStateToProps = (store) => {
+	console.log("Store", store);
+	const { categoryReducer } = store;
+	return {
+		category: categoryReducer.category.categories,
+	};
+};
+export default connect(mapStateToProps, null)(CategoryPage);

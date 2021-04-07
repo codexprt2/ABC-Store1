@@ -18,27 +18,26 @@ const useStyles = makeStyles({
 	},
 });
 
-const TableComponent = ({ handleEdit, category, remove }) => {
+const TableComponent = ({ handleEdit, remove, headers, data }) => {
 	const classes = useStyles();
-	console.log("category!!!!", category);
+	console.log("category!!!!", data);
 
 	return (
 		<TableContainer component={Paper}>
 			<Table className={classes.table} aria-label='simple table'>
 				<TableHead>
 					<TableRow>
-						<TableCell>Category Name</TableCell>
-						<TableCell align='right'>Category Id</TableCell>
+						<TableCell>{headers}</TableCell>
 						<TableCell align='right'>Action</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{category.map((row, index) => (
+					{data.map((row, index) => (
 						<TableRow key={`${index}`}>
 							<TableCell component='th' scope='row'>
 								{row.name}
 							</TableCell>
-							<TableCell align='right'>{row.id}</TableCell>
+
 							<TableCell align='right'>
 								<button>
 									<AiTwotoneEdit onClick={() => handleEdit(index, row)} />
@@ -54,16 +53,10 @@ const TableComponent = ({ handleEdit, category, remove }) => {
 		</TableContainer>
 	);
 };
-const mapStateToProps = (store) => {
-	console.log("Store", store);
-	const { categoryReducer } = store;
-	return {
-		category: categoryReducer.category.categories,
-	};
-};
+
 const mapDispatchToProps = (dispatch) => {
 	return {
 		remove: (id) => dispatch(removeCategory(id)),
 	};
 };
-export default connect(mapStateToProps, mapDispatchToProps)(TableComponent);
+export default connect(null, mapDispatchToProps)(TableComponent);
