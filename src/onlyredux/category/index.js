@@ -2,7 +2,7 @@ import { ADD_CATEGORY, REMOVE_CATEGORY, EDIT_CATEGORY } from "./type";
 
 const defaultState = {
 	category: {
-		categories: [{ id: 1, name: "fashion" }],
+		categories: [],
 	},
 };
 const categoryReducer = (state = defaultState, action) => {

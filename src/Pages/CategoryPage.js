@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 const CategoryPage = ({ category }) => {
 	const [isFormVisible, setisFormVisible] = useState(false);
 	const [updateData, setUpdateData] = useState(null);
-	const tableHeader = ["Category Name"];
+	const tableHeader = ["Category Name", "Category Id"];
 	const added = (val) => {
 		setisFormVisible(val);
 	};

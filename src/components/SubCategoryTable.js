@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 	},
 });
 
-const TableComponent = ({ handleEdit, remove, headers, data }) => {
+const SubCategoryTable = ({ handleEdit, remove, headers, data }) => {
 	const classes = useStyles();
 
 	return (
@@ -40,7 +40,7 @@ const TableComponent = ({ handleEdit, remove, headers, data }) => {
 								{row.name}
 							</TableCell>
 							<TableCell component='th' scope='row'>
-								{index}
+								{row.selectedCategory.label}
 							</TableCell>
 
 							<TableCell align='right'>
@@ -64,4 +64,4 @@ const mapDispatchToProps = (dispatch) => {
 		remove: (id) => dispatch(removeCategory(id)),
 	};
 };
-export default connect(null, mapDispatchToProps)(TableComponent);
+export default connect(null, mapDispatchToProps)(SubCategoryTable);
