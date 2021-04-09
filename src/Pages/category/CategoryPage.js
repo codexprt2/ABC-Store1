@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import TitleAppBar from "../components/TitleAppBar";
-import ButtonTab from "../components/ButtonTab";
+import TitleAppBar from "../../components/TitleAppBar";
+import ButtonTab from "../../components/ButtonTab";
 import "./style.css";
-import Form from "../components/Form";
-import TableComponent from "../components/TableComponent";
+import Form from "./Form";
+import TableComponent from "./TableComponent";
 import { connect } from "react-redux";
 
 const CategoryPage = ({ category }) => {

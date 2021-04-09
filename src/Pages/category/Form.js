@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { addCategory, editCategory } from "../onlyredux/category/action";
+import { addCategory, editCategory } from "../../onlyredux/category/action";
 
 const Form = ({
 	added,

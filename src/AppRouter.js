@@ -2,9 +2,9 @@ import "./App.css";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import login from "./Pages/login";
 import Dashboard from "./Pages/Dashboard";
-import CategoryPage from "./Pages/CategoryPage";
-import ProductPage from "./Pages/ProductPage";
-import SubCategoryPage from "./Pages/SubCategoryPage";
+import CategoryPage from "./Pages/category/CategoryPage";
+import ProductPage from "./Pages/product/ProductPage";
+import SubCategoryPage from "./Pages/subCategory/SubCategoryPage";
 
 function AppRouter() {
 	return (

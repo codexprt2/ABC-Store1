@@ -10,7 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { connect } from "react-redux";
-import { removeCategory } from "../onlyredux/category/action";
+import { removeProduct } from "../../onlyredux/product/action";
 
 const useStyles = makeStyles({
 	table: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 	},
 });
 
-const TableComponent = ({ handleEdit, remove, headers, data }) => {
+const ProductTable = ({ handleEdit, remove, headers, product }) => {
 	const classes = useStyles();
 
 	return (
@@ -34,21 +34,33 @@ const TableComponent = ({ handleEdit, remove, headers, data }) => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{data.map((row, index) => (
+					{product.map((item, index) => (
 						<TableRow key={`${index}`}>
 							<TableCell component='th' scope='row'>
-								{row.name}
+								{item.name}
 							</TableCell>
 							<TableCell component='th' scope='row'>
-								{index}
+								{item.selectedCategory.label}
+							</TableCell>
+							<TableCell component='th' scope='row'>
+								{item.selectedSubCategory.label}
+							</TableCell>
+							<TableCell component='th' scope='row'>
+								{item.desc}
+							</TableCell>
+							<TableCell component='th' scope='row'>
+								{item.price}
+							</TableCell>
+							<TableCell component='th' scope='row'>
+								{item.quantity}
 							</TableCell>
 
 							<TableCell align='right'>
 								<button>
-									<AiTwotoneEdit onClick={() => handleEdit(index, row)} />
+									<AiTwotoneEdit onClick={() => handleEdit(index, item)} />
 								</button>
 								<button>
-									<RiDeleteBin5Line onClick={() => remove(row.id)} />
+									<RiDeleteBin5Line onClick={() => remove(item)} />
 								</button>
 							</TableCell>
 						</TableRow>
@@ -58,10 +70,16 @@ const TableComponent = ({ handleEdit, remove, headers, data }) => {
 		</TableContainer>
 	);
 };
-
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (store) => {
+	const { productReducer } = store;
 	return {
-		remove: (id) => dispatch(removeCategory(id)),
+		product: productReducer.product.products,
 	};
 };
-export default connect(null, mapDispatchToProps)(TableComponent);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		remove: (val) => dispatch(removeProduct(val)),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductTable);

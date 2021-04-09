@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import TitleAppBar from "../components/TitleAppBar";
+import TitleAppBar from "../../components/TitleAppBar";
 import "./style.css";
-import ButtonTab from "../components/ButtonTab";
-import SubCategoryTable from "../components/SubCategoryTable";
+import ButtonTab from "../../components/ButtonTab";
+import SubCategoryTable from "./SubCategoryTable";
 import { connect } from "react-redux";
-import SubCategoryForm from "../components/SubCategoryForm";
+import SubCategoryForm from "./SubCategoryForm";
 
-const SubCategoryPage = ({ category, subCategory }) => {
+const SubCategoryPage = ({ category }) => {
 	const [isFormVisible, setisFormVisible] = useState(false);
 	const [updateData, setUpdateData] = useState(null);
 
@@ -16,7 +16,6 @@ const SubCategoryPage = ({ category, subCategory }) => {
 	};
 
 	const handleEdit = (index, editData) => {
-		console.log("item", index, editData);
 		setisFormVisible(true);
 		setUpdateData({ index, ...editData });
 	};
@@ -40,17 +39,13 @@ const SubCategoryPage = ({ category, subCategory }) => {
 			</div>
 
 			<div>
-				<SubCategoryTable
-					headers={tableHeader}
-					handleEdit={handleEdit}
-					data={subCategory}
-				/>
+				<SubCategoryTable headers={tableHeader} handleEdit={handleEdit} />
 			</div>
 		</div>
 	);
 };
 const mapStateToProps = (store) => {
-	const { categoryReducer, subCategoryReducer } = store;
+	const { categoryReducer } = store;
 
 	console.log(store);
 	return {
@@ -60,7 +55,6 @@ const mapStateToProps = (store) => {
 				label: obj.name,
 			};
 		}),
-		subCategory: subCategoryReducer.subcategory.subCategories,
 	};
 };
 export default connect(mapStateToProps, null)(SubCategoryPage);

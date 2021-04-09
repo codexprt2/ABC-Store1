@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {
 	addSubCategory,
 	updateSubCategory,
-} from "../onlyredux/subCategory/action";
+} from "../../onlyredux/subCategory/action";
 import Select from "react-select";
 import "./style.css";
 
@@ -20,13 +20,8 @@ const SubCategoryForm = ({
 	const [selectedCategory, setSelectedCategory] = useState(null);
 
 	const catId = category.findIndex(
-		(category) => category.name == selectedCategory
+		(category) => category.label == selectedCategory
 	);
-
-	const onChangeCategory = (selectedCategory) => {
-		setSelectedCategory(selectedCategory.name);
-	};
-	console.log("onChangeCategory", selectedCategory);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -55,6 +50,10 @@ const SubCategoryForm = ({
 			setSelectedCategory(editData.selectedCategory.label);
 		}
 	}, [editData]);
+
+	const onChangeCategory = (selectedCategory) => {
+		setSelectedCategory(selectedCategory.label);
+	};
 	return (
 		<form
 			onSubmit={(e) => {
@@ -63,16 +62,16 @@ const SubCategoryForm = ({
 			<label>Select Category:</label>
 			<Select
 				name='category'
-				label={category.name}
+				label={category.label}
 				value={selectedCategory}
 				onChange={onChangeCategory}
 				options={category}
 				className='select'>
-				{category.map((cat, index) => (
+				{/* {category.map((cat, index) => (
 					<options key={`${index}`} value={cat.label}>
 						{cat.label}
 					</options>
-				))}
+				))} */}
 			</Select>
 			<br />
 			{/* {JSON.stringify(category)} */}

@@ -23,9 +23,7 @@ const categoryReducer = (state = defaultState, action) => {
 		}
 		case EDIT_CATEGORY: {
 			const UpdateCategory = state.category.categories;
-			console.log("UpdateCategory", UpdateCategory);
 			UpdateCategory[action.payload.index].name = action.payload.val;
-			console.log("action.payload", action.payload);
 			return {
 				category: {
 					...state.category,
