@@ -17,17 +17,16 @@ export const getCategories = () => {
 };
 
 export const addCategory = (category) => {
+	console.log("category1", category);
 	return new Promise((resolve, reject) => {
 		//  Get add category in firestore
-
+		let insertData = { name: category };
 		db()
 			.collection("category")
-			.add({ name: category })
-			.then((docRef) => {
-				console.log("Document written with ID: ", docRef.id);
-				getCategories().then((values) => {
-					resolve(values);
-				});
+			.add(insertData)
+			.then(async (docRef) => {
+				insertData = { id: docRef.id, ...insertData };
+				resolve(insertData);
 			})
 			.catch((error) => {
 				console.error("Error adding document: ", error);
@@ -38,11 +37,22 @@ export const addCategory = (category) => {
 
 export const editCategory = (category) => {
 	console.log("category123", category.id);
-	return new Promise((resolve) => {
+	return new Promise((resolve, reject) => {
 		//  Get edit category in firestore
-		db().collection("category").doc(category.id).update({
-			name: category.name,
-		});
+		let updateData = { name: category.name };
+		db()
+			.collection("category")
+			.doc(category.id)
+			.update(updateData)
+			.then(async (docRef) => {
+				updateData = { id: docRef.id, ...updateData };
+				resolve(updateData);
+			})
+
+			.catch((error) => {
+				console.error("Error adding document: ", error);
+				reject(error);
+			});
 	});
 };
 

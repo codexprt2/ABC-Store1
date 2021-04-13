@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { addCategory, editCategory } from "../../onlyredux/category/action";
-
+// import { addCategory, editCategory } from "../../onlyredux/category/action";
+import { addCategoryValue, updateCategoryValue } from "../../redux/action";
 const Form = ({
 	added,
 	isEdit,
@@ -54,8 +54,8 @@ const Form = ({
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
-		addCategoryData: (val) => dispatch(addCategory(val)),
-		updateCategory: (index, val) => dispatch(editCategory(index, val)),
+		addCategoryData: (val) => dispatch(addCategoryValue(val)),
+		updateCategory: (index, val) => dispatch(updateCategoryValue(index, val)),
 	};
 };
 

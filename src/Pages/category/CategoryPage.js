@@ -8,15 +8,22 @@ import { connect } from "react-redux";
 
 const CategoryPage = ({ category }) => {
 	const [isFormVisible, setisFormVisible] = useState(false);
+	const [isTableVisible, setisTableVisible] = useState(true);
+
 	const [updateData, setUpdateData] = useState(null);
 	const tableHeader = ["Category Name", "Category Id"];
 	const added = (val) => {
 		setisFormVisible(val);
+		setisTableVisible(!val);
 	};
 	const handleEdit = (index, editData) => {
-		console.log("item", index, editData);
 		setisFormVisible(true);
 		setUpdateData({ index, ...editData });
+		setisTableVisible(false);
+	};
+	const handleView = () => {
+		setisFormVisible(true);
+		setisTableVisible(false);
 	};
 	return (
 		<React.Fragment>
@@ -32,14 +39,16 @@ const CategoryPage = ({ category }) => {
 				</div>
 			)}
 			<div className='addBtn'>
-				<ButtonTab name='ADD NEW' onClick={() => setisFormVisible(true)} />
+				<ButtonTab name='ADD NEW' onClick={handleView} />
 			</div>
 			<div>
-				<TableComponent
-					headers={tableHeader}
-					handleEdit={handleEdit}
-					data={category}
-				/>
+				{isTableVisible && (
+					<TableComponent
+						headers={tableHeader}
+						handleEdit={handleEdit}
+						data={category}
+					/>
+				)}
 			</div>
 		</React.Fragment>
 	);

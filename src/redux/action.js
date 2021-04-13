@@ -9,6 +9,7 @@ const setCategoryLoader = (val) => {
 };
 
 const setCategoryData = (val) => {
+	console.log("val", val);
 	return {
 		type: types.SET_CATEGORY,
 		payload: val,
@@ -18,6 +19,8 @@ const setCategoryData = (val) => {
 export const addCategoryValue = (category) => (dispatch) => {
 	dispatch(setCategoryLoader(true));
 	categoryFirestore.addCategory(category).then((categoryVal) => {
+		console.log("categoryval", categoryVal);
+
 		dispatch(setCategoryData(categoryVal));
 		dispatch(setCategoryLoader(false));
 	});
@@ -30,6 +33,7 @@ export const updateCategoryData = (val) => {
 	};
 };
 export const updateCategoryValue = (category) => (dispatch) => {
+	console.log("updateCategory", category);
 	dispatch(setCategoryLoader(true));
 	categoryFirestore.editCategory(category).then((categoryVal) => {
 		dispatch(updateCategoryData(categoryVal));

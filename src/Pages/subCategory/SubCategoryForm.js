@@ -34,6 +34,7 @@ const SubCategoryForm = ({
 			onEditHandle();
 			setName("");
 			setSelectedCategory(null);
+			added(false);
 		} else {
 			addSubCategory({
 				name,

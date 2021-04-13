@@ -1,0 +1,30 @@
+UPDATE OPERATION
+=========================================================================
+
+OPTION 1: WITH CUSTOM ID ("LA")
+-------------------------------------------------------------------------
+db.collection("cities").doc("LA").set({
+    name: "Los Angeles",
+    state: "CA",
+    country: "USA"
+})
+.then(() => {
+    console.log("Document successfully written!");
+})
+.catch((error) => {
+    console.error("Error writing document: ", error);
+});
+
+
+OPTION 2: WITH AUTO GENERATED ID
+-------------------------------------------------------------------------
+db.collection("cities").add({
+    name: "Tokyo",
+    country: "Japan"
+})
+.then((docRef) => {
+    console.log("Document written with ID: ", docRef.id);
+})
+.catch((error) => {
+    console.error("Error adding document: ", error);
+});

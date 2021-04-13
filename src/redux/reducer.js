@@ -19,10 +19,11 @@ const categoryReducer = (state = defaultState, action) => {
 			};
 		}
 		case types.SET_CATEGORY: {
+			console.log("action.payload", action.payload);
 			return {
 				category: {
 					...state.category,
-					categories: [...action.payload],
+					categories: [...state.category.categories, action.payload],
 				},
 			};
 		}

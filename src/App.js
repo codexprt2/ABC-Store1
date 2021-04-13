@@ -1,7 +1,7 @@
 import "./App.css";
 import AppRouter from "./AppRouter";
 import { Provider } from "react-redux";
-import { store, persistor } from "./onlyredux/store";
+import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 
 const App = () => {

@@ -47,6 +47,7 @@ const ProductForm = ({
 			setDesc("");
 			setSelectedCategory(null);
 			setSelectedSubCategory(null);
+			added(false);
 		} else {
 			addProductData({
 				name,
@@ -117,10 +118,11 @@ const ProductForm = ({
 			<br />
 			<label> Description:</label>
 			<br />
-			<input
+			<textarea
 				name='name'
 				type='text'
 				value={desc}
+				className='teaxtArea'
 				onChange={(e) => setDesc(e.target.value)}
 			/>
 			<br />

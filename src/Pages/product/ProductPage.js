@@ -8,7 +8,7 @@ import ProductTable from "./ProductTable";
 const ProductPage = () => {
 	const [isFormVisible, setisFormVisible] = useState(false);
 	const [updateData, setUpdateData] = useState(null);
-
+	const [isTableVisible, setisTableVisible] = useState(true);
 	const tableHeader = [
 		"Product Name",
 		"Category",
@@ -21,9 +21,15 @@ const ProductPage = () => {
 		console.log("item", index, editData);
 		setisFormVisible(true);
 		setUpdateData({ index, ...editData });
+		setisTableVisible(false);
 	};
 	const added = (val) => {
 		setisFormVisible(val);
+		setisTableVisible(!val);
+	};
+	const handleView = () => {
+		setisFormVisible(true);
+		setisTableVisible(false);
 	};
 	return (
 		<React.Fragment>
@@ -39,10 +45,12 @@ const ProductPage = () => {
 				</div>
 			)}
 			<div className='addBtn'>
-				<ButtonTab name='ADD NEW' onClick={() => setisFormVisible(true)} />
+				<ButtonTab name='ADD NEW' onClick={handleView} />
 			</div>
 			<div>
-				<ProductTable headers={tableHeader} handleEdit={handleEdit} />
+				{isTableVisible && (
+					<ProductTable headers={tableHeader} handleEdit={handleEdit} />
+				)}
 			</div>
 		</React.Fragment>
 	);
