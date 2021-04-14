@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TitleAppBar from "../../components/TitleAppBar";
 import ButtonTab from "../../components/ButtonTab";
 import "./style.css";
@@ -25,6 +25,7 @@ const CategoryPage = ({ category }) => {
 		setisFormVisible(true);
 		setisTableVisible(false);
 	};
+
 	return (
 		<React.Fragment>
 			<TitleAppBar name='Category' />

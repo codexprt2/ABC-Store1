@@ -16,6 +16,15 @@ const setCategoryData = (val) => {
 	};
 };
 
+export const setCategories = () => (dispatch) => {
+	dispatch(setCategoryLoader(true));
+	categoryFirestore.getCategories().then((categoryVal) => {
+		console.log("categoryval", categoryVal);
+		dispatch(setCategoryData(categoryVal));
+		dispatch(setCategoryLoader(false));
+	});
+};
+
 export const addCategoryValue = (category) => (dispatch) => {
 	dispatch(setCategoryLoader(true));
 	categoryFirestore.addCategory(category).then((categoryVal) => {
