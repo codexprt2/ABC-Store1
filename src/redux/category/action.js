@@ -1,4 +1,4 @@
-import * as categoryFirestore from "../helper/firestoreFunctions/category";
+import * as categoryFirestore from "../../helper/firestoreFunctions/category";
 import * as types from "./types";
 
 const setCategoryLoader = (val) => {

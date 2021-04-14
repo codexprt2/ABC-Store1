@@ -10,7 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { connect } from "react-redux";
-import { deleteCategoryData } from "../../redux/action";
+import { deleteCategoryData } from "../../redux/category/action";
 
 const useStyles = makeStyles({
 	table: {

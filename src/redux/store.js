@@ -1,11 +1,13 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import categoryReducer from "../redux/reducer";
+import categoryReducer from "../redux/category/reducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import subCategoryReducer from "./subCategory/index";
 
 const reducer = combineReducers({
 	categoryReducer,
+	subCategoryReducer,
 });
 const persistConfig = {
 	key: "root",

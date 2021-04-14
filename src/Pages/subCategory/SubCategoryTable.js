@@ -43,7 +43,7 @@ const SubCategoryTable = ({ handleEdit, remove, headers, subCategory }) => {
 							</TableCell>
 							<TableCell component='th' scope='row'>
 								{/* {JSON.stringify(item)} */}
-								{item.selectedCategory.label}
+								{item.selectedCategory}
 							</TableCell>
 
 							<TableCell align='right'>

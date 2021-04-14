@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import {
-	addSubCategory,
-	updateSubCategory,
-} from "../../onlyredux/subCategory/action";
+import { addSubCategoryValue } from "../../redux/subCategory/action";
 import Select from "react-select";
 import "./style.css";
 
@@ -18,10 +15,10 @@ const SubCategoryForm = ({
 }) => {
 	const [name, setName] = useState("");
 	const [selectedCategory, setSelectedCategory] = useState(null);
+	console.log("category", category);
 
-	const catId = category.findIndex(
-		(category) => category.label == selectedCategory
-	);
+	const catId = category.findIndex((category) => category === selectedCategory);
+	console.log("catId", catId);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -53,8 +50,9 @@ const SubCategoryForm = ({
 	}, [editData]);
 
 	const onChangeCategory = (selectedCategory) => {
-		setSelectedCategory(selectedCategory.label);
+		setSelectedCategory(selectedCategory);
 	};
+	console.log("selectedCategory", selectedCategory);
 	return (
 		<form
 			onSubmit={(e) => {
@@ -63,17 +61,11 @@ const SubCategoryForm = ({
 			<label>Select Category:</label>
 			<Select
 				name='category'
-				label={category.label}
+				label={category}
 				value={selectedCategory}
 				onChange={onChangeCategory}
 				options={category}
-				className='select'>
-				{/* {category.map((cat, index) => (
-					<options key={`${index}`} value={cat.label}>
-						{cat.label}
-					</options>
-				))} */}
-			</Select>
+				className='select'></Select>
 			<br />
 			{/* {JSON.stringify(category)} */}
 
@@ -94,8 +86,8 @@ const SubCategoryForm = ({
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
-		addSubCategory: (val) => dispatch(addSubCategory(val)),
-		editSubCategory: (val) => dispatch(updateSubCategory(val)),
+		addSubCategory: (val) => dispatch(addSubCategoryValue(val)),
+		// editSubCategory: (val) => dispatch(updateSubCategory(val)),
 	};
 };
 
