@@ -17,7 +17,7 @@ const Form = ({
 		e.preventDefault();
 
 		if (isEdit) {
-			updateCategory(editData.index, catName);
+			updateCategory(editData, catName);
 			onEditHandle();
 			setCatName("");
 			added(false);
@@ -55,7 +55,7 @@ const Form = ({
 const mapDispatchToProps = (dispatch) => {
 	return {
 		addCategoryData: (val) => dispatch(addCategoryValue(val)),
-		updateCategory: (index, val) => dispatch(updateCategoryValue(index, val)),
+		updateCategory: (data, val) => dispatch(updateCategoryValue(data, val)),
 	};
 };
 

@@ -10,7 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { connect } from "react-redux";
-import { removeCategory } from "../../onlyredux/category/action";
+import { deleteCategoryData } from "../../redux/action";
 
 const useStyles = makeStyles({
 	table: {
@@ -61,7 +61,7 @@ const TableComponent = ({ handleEdit, remove, headers, data }) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		remove: (id) => dispatch(removeCategory(id)),
+		remove: (id) => dispatch(deleteCategoryData(id)),
 	};
 };
 export default connect(null, mapDispatchToProps)(TableComponent);

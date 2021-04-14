@@ -27,11 +27,33 @@ const categoryReducer = (state = defaultState, action) => {
 				},
 			};
 		}
-		case types.EDIT_CATEGORY: {
+		case types.UPDATE_CATEGORY: {
+			console.log("action.payload", action.payload);
+			const UpdateCategory = state.category.categories.map((obj) => {
+				if (obj.id === action.payload.id) {
+					return action.payload;
+				} else {
+					return obj;
+				}
+			});
+
 			return {
 				category: {
 					...state.category,
-					activeCategories: action.payload,
+					categories: [...UpdateCategory],
+				},
+			};
+		}
+		case types.DELETE_CATEGORY: {
+			console.log("action.payload", action.payload);
+			const categoriesData = state.category.categories.filter(
+				(item) => item.id !== action.payload
+			);
+			console.log("categoriesData", categoriesData);
+			return {
+				state,
+				category: {
+					categories: [...categoriesData],
 				},
 			};
 		}

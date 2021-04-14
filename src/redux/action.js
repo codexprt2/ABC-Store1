@@ -26,24 +26,35 @@ export const addCategoryValue = (category) => (dispatch) => {
 	});
 };
 
-export const updateCategoryData = (val) => {
+export const updateCategoryData = (categoryVal) => {
+	console.log("val here!!!", categoryVal);
 	return {
 		type: types.UPDATE_CATEGORY,
-		payload: val,
+		payload: categoryVal,
 	};
 };
-export const updateCategoryValue = (category) => (dispatch) => {
-	console.log("updateCategory", category);
+export const updateCategoryValue = (data, category) => (dispatch) => {
+	// console.log("updateCategory", category);
 	dispatch(setCategoryLoader(true));
-	categoryFirestore.editCategory(category).then((categoryVal) => {
+	categoryFirestore.editCategory(data, category).then((categoryVal) => {
+		// console.log("val here!!!", categoryVal);
+
 		dispatch(updateCategoryData(categoryVal));
 		dispatch(setCategoryLoader(false));
 	});
 };
 
-export const editCategoryData = (val) => {
+export const deleteCategoryValue = (val) => {
+	console.log("val 444", val);
 	return {
-		type: types.EDIT_CATEGORY,
+		type: types.DELETE_CATEGORY,
 		payload: val,
 	};
+};
+export const deleteCategoryData = (val) => (dispatch) => {
+	dispatch(setCategoryLoader(true));
+	categoryFirestore.deleteCategory(val).then(() => {
+		dispatch(deleteCategoryValue(val));
+		dispatch(setCategoryLoader(false));
+	});
 };
