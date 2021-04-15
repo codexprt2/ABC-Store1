@@ -18,6 +18,14 @@ const subCategoryReducer = (state = defaultState, action) => {
 			};
 		}
 		case types.SET_SUBCATEGORY: {
+			return {
+				subcategory: {
+					...state.subcategory,
+					subCategories: [...action.payload],
+				},
+			};
+		}
+		case types.ADD_SUBCATEGORY: {
 			console.log("DDDD", action.payload.data);
 			const category = action.payload.data.filter(
 				(item) => item.id == action.payload.val.categoryId

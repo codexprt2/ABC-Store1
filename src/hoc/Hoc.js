@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import AppRouter from "../AppRouter";
+import { connect } from "react-redux";
+import { setSubCategories } from "../redux/subCategory/action";
 import { setCategories } from "../redux/category/action";
 
-const Hoc = ({ children }) => {
+const Hoc = ({ children, setCategoriesData, setSubCategoriesData }) => {
 	useEffect(() => {
-		setCategories();
+		setCategoriesData();
+		setSubCategoriesData();
 	}, []);
 	return (
 		<div>
@@ -13,5 +16,10 @@ const Hoc = ({ children }) => {
 		</div>
 	);
 };
-
-export default Hoc;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		setCategoriesData: () => dispatch(setCategories()),
+		setSubCategoriesData: () => dispatch(setSubCategories()),
+	};
+};
+export default connect(null, mapDispatchToProps)(Hoc);

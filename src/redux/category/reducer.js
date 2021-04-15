@@ -23,6 +23,14 @@ const categoryReducer = (state = defaultState, action) => {
 			return {
 				category: {
 					...state.category,
+					categories: [...action.payload],
+				},
+			};
+		}
+		case types.ADD_CATEGORY: {
+			return {
+				category: {
+					...state.category,
 					categories: [...state.category.categories, action.payload],
 				},
 			};

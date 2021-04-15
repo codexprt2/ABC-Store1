@@ -24,13 +24,19 @@ export const setCategories = () => (dispatch) => {
 		dispatch(setCategoryLoader(false));
 	});
 };
+const addCategoryData = (val) => {
+	return {
+		type: types.ADD_CATEGORY,
+		payload: val,
+	};
+};
 
 export const addCategoryValue = (category) => (dispatch) => {
 	dispatch(setCategoryLoader(true));
 	categoryFirestore.addCategory(category).then((categoryVal) => {
 		console.log("categoryval", categoryVal);
 
-		dispatch(setCategoryData(categoryVal));
+		dispatch(addCategoryData(categoryVal));
 		dispatch(setCategoryLoader(false));
 	});
 };
