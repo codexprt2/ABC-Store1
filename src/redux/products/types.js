@@ -1,0 +1,5 @@
+export const SET_PRODUCTS_LOADER = "SET_PRODUCTS_LOADER";
+export const SET_PRODUCT = "SET_PRODUCT";
+export const ADD_PRODUCT = "ADD_PRODUCT";
+export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
+export const EDIT_PRODUCT = "EDIT_PRODUCT";

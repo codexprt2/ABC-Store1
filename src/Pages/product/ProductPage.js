@@ -17,10 +17,9 @@ const ProductPage = () => {
 		"Price",
 		"Quantity",
 	];
-	const handleEdit = (index, editData) => {
-		console.log("item", index, editData);
+	const handleEdit = ( editData) => {
 		setisFormVisible(true);
-		setUpdateData({ index, ...editData });
+		setUpdateData({  ...editData });
 		setisTableVisible(false);
 	};
 	const added = (val) => {

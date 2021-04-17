@@ -15,9 +15,9 @@ const SubCategoryPage = ({ category }) => {
 		setisFormVisible(val);
 	};
 
-	const handleEdit = (index, editData) => {
+	const handleEdit = (editData) => {
 		setisFormVisible(true);
-		setUpdateData({ index, ...editData });
+		setUpdateData({  ...editData });
 	};
 	return (
 		<div>
@@ -51,8 +51,9 @@ const mapStateToProps = (store) => {
 	return {
 		category: categoryReducer.category.categories.map((obj) => {
 			return {
-				value: obj.id,
 				label: obj.name,
+				value: obj.id,
+
 			};
 		}),
 	};

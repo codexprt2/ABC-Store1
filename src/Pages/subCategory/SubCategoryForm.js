@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { addSubCategoryValue } from "../../redux/subCategory/action";
+import { addSubCategoryValue, updateSubCategoryValue } from "../../redux/subCategory/action";
 import Select from "react-select";
 import "./style.css";
 
@@ -15,18 +15,20 @@ const SubCategoryForm = ({
 }) => {
 	const [name, setName] = useState("");
 	const [selectedCategory, setSelectedCategory] = useState(null);
-	console.log("category", category);
 
-	const catId = category.findIndex((category) => category === selectedCategory);
-	console.log("catId", catId);
 
+	console.log("Edi",editData)
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (isEdit) {
 			editSubCategory({
-				id: editData.index,
+				id: editData.id,
 				name,
-				selectedCategory: category[catId],
+				
+				selectedCategory: {
+					value: selectedCategory.value,
+					label: selectedCategory.label,
+				  },
 			});
 			onEditHandle();
 			setName("");
@@ -45,14 +47,21 @@ const SubCategoryForm = ({
 	useEffect(() => {
 		if (isEdit && editData) {
 			setName(editData.name);
-			setSelectedCategory(editData.selectedCategory.label);
+			setSelectedCategory(editData.selectedCategory);
+			
 		}
 	}, [editData]);
+
+	console.log("selectedCategory",selectedCategory)
+
 
 	const onChangeCategory = (selectedCategory) => {
 		setSelectedCategory(selectedCategory);
 	};
-	console.log("selectedCategory", selectedCategory);
+	const catId = category.findIndex((category) => category == selectedCategory);
+	console.log("catId",catId)
+	console.log("category",category)
+
 	return (
 		<form
 			onSubmit={(e) => {
@@ -61,7 +70,7 @@ const SubCategoryForm = ({
 			<label>Select Category:</label>
 			<Select
 				name='category'
-				label={category}
+				label={category.label}
 				value={selectedCategory}
 				onChange={onChangeCategory}
 				options={category}
@@ -87,7 +96,8 @@ const SubCategoryForm = ({
 const mapDispatchToProps = (dispatch) => {
 	return {
 		addSubCategory: (val) => dispatch(addSubCategoryValue(val)),
-		// editSubCategory: (val) => dispatch(updateSubCategory(val)),
+		editSubCategory: (val) => dispatch(updateSubCategoryValue(val)),
+
 	};
 };
 

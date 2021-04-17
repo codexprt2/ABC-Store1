@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import "./style.css";
 import { connect } from "react-redux";
-import { addProduct, updateProduct } from "../../onlyredux/product/action";
+import { addProductValue,updateProductValue } from "../../redux/products/action";
 
 const ProductForm = ({
 	added,
@@ -22,23 +22,30 @@ const ProductForm = ({
 	const [selectedSubCategory, setSelectedSubCategory] = useState(null);
 
 	const catId = category.findIndex(
-		(category) => category.label == selectedCategory
+		(category) => category== selectedCategory
 	);
-	const subCatId = subcategory.findIndex(
-		(subcategory) => subcategory.label == selectedSubCategory
-	);
+	console.log("editData",editData)
 
+	const subCatId = subcategory.findIndex(
+		(subcategory) => subcategory == selectedSubCategory
+	);
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (isEdit) {
 			editProductData({
-				id: editData.index,
+				id: editData.id,
 				name,
 				price,
 				quantity,
 				desc,
-				selectedCategory: category[catId],
-				selectedSubCategory: subcategory[subCatId],
+				selectedCategory: {
+					value: selectedCategory.value,
+					label: selectedCategory.label,
+				  },
+				selectedSubCategory: {
+					value:selectedSubCategory.value,
+					label:selectedSubCategory.label
+				},
 			});
 			onEditHandle();
 			setName("");
@@ -68,10 +75,13 @@ const ProductForm = ({
 	};
 
 	const onChangeCategory = (selectedCategory) => {
-		setSelectedCategory(selectedCategory.label);
+		setSelectedCategory(selectedCategory);
 	};
+	console.log("selectedCategory",selectedCategory)
+
+
 	const onChangeSubCategory = (selectedSubCategory) => {
-		setSelectedSubCategory(selectedSubCategory.label);
+		setSelectedSubCategory(selectedSubCategory);
 	};
 	useEffect(() => {
 		if (isEdit && editData) {
@@ -79,8 +89,8 @@ const ProductForm = ({
 			setPrice(editData.price);
 			setQuantity(editData.quantity);
 			setDesc(editData.desc);
-			setSelectedCategory(editData.selectedCategory.label);
-			setSelectedSubCategory(editData.selectedSubCategory.label);
+			setSelectedCategory(editData.selectedCategory);
+			setSelectedSubCategory(editData.selectedSubCategory);
 		}
 	}, [editData]);
 
@@ -176,8 +186,8 @@ const mapStateToProps = (store) => {
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
-		addProductData: (val) => dispatch(addProduct(val)),
-		editProductData: (val) => dispatch(updateProduct(val)),
+		addProductData: (val) => dispatch(addProductValue(val)),
+		editProductData: (val) => dispatch(updateProductValue(val)),
 	};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductForm);

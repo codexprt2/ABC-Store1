@@ -53,7 +53,8 @@ const categoryReducer = (state = defaultState, action) => {
 			};
 		}
 		case types.DELETE_CATEGORY: {
-			console.log("action.payload", action.payload);
+			
+		console.log("action.payload", action.payload);
 			const categoriesData = state.category.categories.filter(
 				(item) => item.id !== action.payload
 			);

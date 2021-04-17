@@ -18,32 +18,73 @@ const subCategoryReducer = (state = defaultState, action) => {
 			};
 		}
 		case types.SET_SUBCATEGORY: {
+
+			const subcategory1 = action.payload.val.map(function (sub) {
+				var category = action.payload.data.filter(function (cat){
+					return cat.id === sub.categoryId
+				})[0];
+				return {id: sub.id, name: sub.name,  selectedCategory:{label: category.name, value:category.id}, };
+			});
+			
+			console.log("magic here!!",subcategory1);
+			
+			
+
 			return {
 				subcategory: {
 					...state.subcategory,
-					subCategories: [...action.payload],
+					subCategories:[...subcategory1],
 				},
 			};
 		}
 		case types.ADD_SUBCATEGORY: {
-			console.log("DDDD", action.payload.data);
 			const category = action.payload.data.filter(
 				(item) => item.id == action.payload.val.categoryId
 			);
-			console.log("iii", category);
 			return {
 				subcategory: {
 					...state.subcategory,
 					subCategories: [
 						...state.subcategory.subCategories,
 						{
+							id: action.payload.val.id,
 							name: action.payload.val.name,
-							selectedCategory: category[0].name,
+							
+							selectedCategory: {label:category[0].name, value:category[0].id},
 						},
 					],
 				},
 			};
 		}
+
+		case types.REMOVE_SUBCATEGORY: {
+			const subcategoriesData = state.subcategory.subcategories.filter(
+				(item) => item.id !== action.payload
+			);
+			return {
+				state,
+				subcategory: {
+					subcategories: [...subcategoriesData],
+				},
+			};
+
+		}	
+		case types.EDIT_SUBCATEGORY:{
+			console.log("action.payload", action.payload);
+			const UpdateSubCategory = state.subcategory.subCategories;
+			const subcatId = UpdateSubCategory.findIndex((subcategory) => subcategory.id === action.payload.val.id);
+
+			UpdateSubCategory[subcatId] = action.payload.val;
+			console.log("UpdateSubCategory", UpdateSubCategory)
+
+			return{
+
+				subcategory: {
+					...state.subcategory,
+					subCategories: [...UpdateSubCategory],
+				},
+			}
+		}	
 	}
 	return state;
 };

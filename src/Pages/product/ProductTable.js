@@ -10,7 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { connect } from "react-redux";
-import { removeProduct } from "../../onlyredux/product/action";
+import { removeProduct } from "../../redux/products/action";
 
 const useStyles = makeStyles({
 	table: {
@@ -57,10 +57,10 @@ const ProductTable = ({ handleEdit, remove, headers, product }) => {
 
 							<TableCell align='right'>
 								<button>
-									<AiTwotoneEdit onClick={() => handleEdit(index, item)} />
+									<AiTwotoneEdit onClick={() => handleEdit(item)} />
 								</button>
 								<button>
-									<RiDeleteBin5Line onClick={() => remove(item)} />
+									<RiDeleteBin5Line onClick={() => remove(item.id)} />
 								</button>
 							</TableCell>
 						</TableRow>

@@ -10,14 +10,12 @@ export const getSubCategories = () => {
 				snapshot.docs.map((val) => {
 					subCategoryData = [...subCategoryData, { id: val.id, ...val.data() }];
 				});
-				console.log("subCategoryData : ", subCategoryData);
 				resolve(subCategoryData);
 			});
 	});
 };
 
 export const addSubCategory = (subcategory) => {
-	console.log("category1", subcategory);
 	return new Promise((resolve, reject) => {
 		//  Get add category in firestore
 		let insertData = {
@@ -38,6 +36,38 @@ export const addSubCategory = (subcategory) => {
 	});
 };
 
-export const editSubCategory = () => {};
 
-export const deleteSubCategory = () => {};
+export const deleteSubCategory = (val) => {
+	return new Promise((resolve, reject) => {
+		//  Get delete category in firestore
+		db()
+			.collection("subcategory")
+			.doc(val)
+			.delete()
+			.then(resolve)
+			.catch((error) => {
+				console.error("Error removing document: ", error);
+				reject(reject);
+			});
+	});
+};
+
+export const editSubCategory = (subcategory) => {
+	return new Promise((resolve, reject) => {
+		//  Get edit category in firestore
+		let updateData = { name: subcategory.name, categoryId:subcategory.selectedCategory.value};
+		db()
+			.collection("subcategory")
+			.doc(subcategory.id)
+			.update(updateData)
+			.then(async (docRef) => {
+				updateData = { id: subcategory.id, ...updateData };
+				resolve(updateData);
+			})
+
+			.catch((error) => {
+				console.error("Error adding document: ", error);
+				reject(error);
+			});
+	});
+};

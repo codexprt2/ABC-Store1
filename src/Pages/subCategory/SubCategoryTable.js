@@ -10,7 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { connect } from "react-redux";
-import { removeSubCategory } from "../../onlyredux/subCategory/action";
+import { removeSubCategory } from "../../redux/subCategory/action";
 
 const useStyles = makeStyles({
 	table: {
@@ -21,7 +21,6 @@ const useStyles = makeStyles({
 const SubCategoryTable = ({ handleEdit, remove, headers, subCategory }) => {
 	const classes = useStyles();
 
-	console.log("dataQWE", subCategory);
 
 	return (
 		<TableContainer component={Paper}>
@@ -43,15 +42,15 @@ const SubCategoryTable = ({ handleEdit, remove, headers, subCategory }) => {
 							</TableCell>
 							<TableCell component='th' scope='row'>
 								{/* {JSON.stringify(item)} */}
-								{item.selectedCategory}
+								{item.selectedCategory.label}
 							</TableCell>
 
 							<TableCell align='right'>
 								<button>
-									<AiTwotoneEdit onClick={() => handleEdit(index, item)} />
+									<AiTwotoneEdit onClick={() => handleEdit(item)} />
 								</button>
 								<button>
-									<RiDeleteBin5Line onClick={() => remove(item)} />
+									<RiDeleteBin5Line onClick={() => remove(item.id)} />
 								</button>
 							</TableCell>
 						</TableRow>
